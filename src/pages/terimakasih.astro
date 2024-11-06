@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Qrcode from '../components/qrcode.astro'
+---
+
+<Layout title="Terima Kasih - Saung Bala Katineung">
+  <div class="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">
+      <div class="text-center">
+        <img 
+          src="/src/img/logo.png" 
+          class="mx-auto h-16 w-auto grayscale opacity-45" 
+          alt="Logo"
+          transition:name="logo_akhir"
+        >
+        <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+          Terima Kasih!
+        </h2>
+        <p class="mt-2 text-sm text-gray-600">
+          Review Anda telah kami terima dan sangat berarti bagi kami.
+        </p>
+        <div class="mt-8 flex justify-center">
+          <div class="animate-bounce bg-green-700 p-4 rounded-full">
+            <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+        </div>
+        <p class="mt-8 text-sm text-gray-500">
+          Kami akan terus meningkatkan kualitas pelayanan kami.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <Qrcode />
+</Layout>

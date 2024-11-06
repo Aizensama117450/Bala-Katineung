@@ -1,0 +1,150 @@
+---
+import { QRCode } from 'qrcode';
+const wifiNetwork = "COS.BALA KATINEUNG 5G";
+const wifiPassword = "2d$39}Yfl5K6";
+const wifiType = "WPA"; // WPA, WEP, atau empty for open networks
+
+const wifiQRContent = `WIFI:T:${wifiType};S:${wifiNetwork};P:${wifiPassword};;`;
+---
+
+     <!-- WiFi Card -->
+      <div class="bg-white p-8 rounded-lg shadow-lg">
+        <div class="text-center">
+          <div class="flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.14 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">
+            Akses WiFi Gratis!
+          </h3>
+          <p class="text-sm text-gray-600 mb-6">
+            Scan QR code di bawah untuk terhubung ke WiFi kami
+          </p>
+          
+          <!-- QR Code Container -->
+          <div class="flex justify-center mb-6">
+            <div id="qrcode" class="p-4 bg-white rounded-xl border-2 border-green-700"> <img src="../../src/img/qrcode.png" alt="">
+             </div>
+          </div>
+
+          <!-- WiFi Details -->
+          <div class="space-y-2 text-left bg-gray-50 p-4 rounded-lg">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-600">Network:</span>
+              <span class="font-medium text-gray-900">{wifiNetwork}</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-600">Password:</span>
+              <div class="flex items-center">
+                <span id="password" class="font-medium text-gray-900 mr-2">
+                  ••••••••
+                </span>
+                <button id="showPassword" class="text-green-700 hover:text-green-800">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Copy Button -->
+          <button onclick="copyToClipboard()" id="copyWifi" class="md:visible invisible mt-6 w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
+              <path d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
+            </svg>
+            Salin Detail WiFi
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+
+  // Get DOM elements
+  const passwordEl = document.getElementById('password');
+  const showPasswordBtn = document.getElementById('showPassword');
+  const copyWifiBtn = document.getElementById('copyWifi');
+
+
+  // WiFi credentials
+  const wifiDetails = {
+    network: "COS.BALA KATINEUNG 5G",
+    password: "2d$39}Yfl5K6"
+  };
+  // Toggle password visibility
+  showPasswordBtn?.addEventListener('click', () => {
+    if (passwordEl) {
+      if (passwordEl.textContent === '••••••••') {
+        passwordEl.textContent = wifiDetails.password;
+        showPasswordBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
+            <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+          </svg>
+        `;
+      } else {
+        passwordEl.textContent = '••••••••';
+        showPasswordBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+          </svg>
+        `;
+      }
+    }
+  });
+
+  // Copy WiFi details
+  copyWifiBtn?.addEventListener('click', async () => {
+    try {
+      const text = `${wifiDetails.password}`;
+      await navigator.clipboard.writeText(text);
+      
+      // Change button text temporarily
+      const originalText = copyWifiBtn.innerHTML;
+      copyWifiBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+        Tersalin!
+      `;
+      
+      setTimeout(() => {
+        copyWifiBtn.innerHTML = originalText;
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  });
+</script>
+
+
+
+
+<style>
+  #qrcode {
+    transition: transform 0.3s ease;
+  }
+  
+  #qrcode:hover {
+    transform: scale(1.05);
+  }
+
+  .copy-button {
+    transition: all 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+</style>
