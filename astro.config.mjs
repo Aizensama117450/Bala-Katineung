@@ -8,7 +8,7 @@ import playformCompress from '@playform/compress';
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server',
+  output: 'hybrid',
   adapter: vercel(),
   integrations: [tailwind(), playformCompress()]
 });
