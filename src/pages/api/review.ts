@@ -58,3 +58,15 @@ export const POST: APIRoute = async ({ request, redirect }) => {
     );
   }
 };
+export const GET: APIRoute = async ({ request }) => {
+  // Penanganan untuk metode GET di rute "/api/review"
+  return new Response(
+    JSON.stringify({ message: 'API endpoint for reviews' }),
+    {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+};
